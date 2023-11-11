@@ -1,0 +1,54 @@
+\chapter{Пример кода парсера terraform plugin}\label{sec:appendix1}
+%\addcontentsline{toc}{chapter}{}
+
+\begin{lstlisting}[language=Go]
+package main
+
+import (
+"encoding/json"
+"github.com/terraform-providers/terraform-provider-aws/aws"
+"os"
+"reflect"
+)
+
+// Функции для обработки различных типов значений
+
+func processValue(value reflect.Value) (interface{}, bool) {
+// ...
+}
+func walkStruct(v reflect.Value) map[string]interface{} {
+// ...
+}
+func walkSlice(v reflect.Value) []interface{} {
+// ...
+}
+func walkMap(v reflect.Value) map[string]interface{} {
+// ...
+}
+func valueIsValid(value reflect.Value) bool {
+// ...
+}
+
+func check(e error) {
+if e != nil {
+panic(e)
+}
+}
+
+func main() {
+// Инициализация плагина
+provider := aws.Provider()
+
+// Извлечение информации о провайдере
+providerValue := reflect.ValueOf(provider).Elem()
+providerInfo := walkStruct(providerValue)
+
+// Конвертация информации о провайдере в JSON
+m, err := json.MarshalIndent(providerInfo, "", "  ")
+check(err)
+
+// Сохранение JSON в файл
+err = os.WriteFile("./aws.json", m, 0644)
+check(err)
+}
+\end{lstlisting}

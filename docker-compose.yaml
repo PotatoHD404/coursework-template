@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  latex-build:
+    build: .
+    volumes:
+      - .:/workspace
+    working_dir: /app
+    command: /bin/sh -c "cp -r /workspace/* . && latexmk -xelatex && mkdir -p /workspace/build && cp *.pdf /workspace/build"
