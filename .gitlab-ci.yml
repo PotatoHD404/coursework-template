@@ -25,7 +25,7 @@ diff_master:
     - cd $CI_PROJECT_DIR
     - mkdir git-latexdiff-out
     - git fetch origin master:master
-    - git latexdiff --xelatex --no-view --tmpdirprefix $CI_PROJECT_DIR/git-latexdiff-out master
+    - git latexdiff --xelatex --no-view -shell-escape --tmpdirprefix $CI_PROJECT_DIR/git-latexdiff-out master
   artifacts:
     paths:
       - "git-latexdiff-out/*/*.pdf"

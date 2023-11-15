@@ -6,4 +6,4 @@ services:
     volumes:
       - .:/workspace
     working_dir: /app
-    command: /bin/sh -c "cp -r /workspace/* . && latexmk -xelatex && mkdir -p /workspace/build && cp *.pdf /workspace/build"
+    command: /bin/sh -c "cp -r /workspace/* . && latexmk -xelatex -shell-escape && mkdir -p /workspace/build && cp *.pdf /workspace/build"

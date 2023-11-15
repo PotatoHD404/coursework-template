@@ -20,16 +20,16 @@
 
 \usepackage{ifplatform}
 
-\ifwindows
-  \newfontfamily{\cyrillicfont}{Times New Roman}
-  \setmainfont{Times New Roman}
-  \newfontfamily{\cyrillicfonttt}{Courier New}
-  \setmonofont{Courier New}
-\else
-  \setmainfont{Linux Libertine O}
-  \setsansfont{Linux Biolinum O}
-  \setmonofont[SmallCapsFont={Latin Modern Mono Caps}]{Latin Modern Mono Light}
-\fi
+% \ifwindows
+\newfontfamily{\cyrillicfont}{Times New Roman}
+\setmainfont{Times New Roman}
+\newfontfamily{\cyrillicfonttt}{Courier New}
+\setmonofont{Courier New}
+% \else
+%   \setmainfont{Linux Libertine O}
+%   \setsansfont{Linux Biolinum O}
+%   \setmonofont[SmallCapsFont={Latin Modern Mono Caps}]{Latin Modern Mono Light}
+% \fi
 
 %нумерация справа и колонтитулы справа вверху
 \usepackage{fancyhdr}
