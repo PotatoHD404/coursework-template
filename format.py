@@ -36,8 +36,7 @@ def process_directory(directory, max_length=80):
 
 
 def main():
-    for el in ['cmp', 'dp', 'piaps', 'ssrd', 'vp']:
-        process_directory(f'./chapters-{el}', 80)
+    process_directory(f'./chapters', 80)        
 
 
 if __name__ == "__main__":
