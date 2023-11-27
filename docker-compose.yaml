@@ -2,8 +2,7 @@ version: '3'
 
 services:
   latex-build:
-    build: .
+    image: potatohd/latex:latest
     volumes:
       - .:/workspace
-    working_dir: /app
-    command: /bin/sh -c "cp -r /workspace/* . && latexmk -xelatex -shell-escape && mkdir -p /workspace/build && cp *.pdf /workspace/build"
+    command: /bin/sh -c "/home/latex/build_tex.sh /workspace"
