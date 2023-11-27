@@ -45,10 +45,6 @@ RUN echo "selected_scheme scheme-basic" >> texlive.profile && \
     echo "tlpdbopt_install_docfiles 0" >> texlive.profile && \
     echo "tlpdbopt_install_srcfiles 0" >> texlive.profile
 
-
-
-
-
 # Download and install tlmgr
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     tar --strip-components=1 -xvf install-tl-unx.tar.gz && \
@@ -60,10 +56,11 @@ RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && \
     rm -rf /tmp/install-tl-unx
 
 RUN tlmgr update --self && \
-    tlmgr install catchfile eso-pic pdfpages greek-fontenc titling caption biblatex logreq biblatex-gost && \
-    tlmgr install euenc filehook fontspec makecmds polyglossia tipa xkeyval xunicode && \
-    tlmgr install csquotes metalogo xltxtra multirow fp ms pgf xcolor paralist titlesec appendix listings pdflscape setspace
-
+    tlmgr install catchfile eso-pic pdfpages greek-fontenc titling caption biblatex logreq biblatex-gost \
+    euenc filehook fontspec makecmds polyglossia tipa xkeyval xunicode \
+    csquotes metalogo xltxtra multirow fp ms pgf xcolor paralist titlesec appendix listings \
+    pdflscape setspace enumitem float framed fvextra lineno minted newfloat xstring fancyvrb \
+    upquote booktabs
 # Create a directory for custom fonts
 RUN mkdir -p /usr/share/fonts/custom
 
