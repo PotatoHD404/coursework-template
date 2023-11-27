@@ -10,22 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: aergus/latex:2022-01-02
+      image: potatohd/latex:latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
     - name: Build LaTeX
       run: |
-        latexmk -xelatex -shell-escape
+        chmod +x ./build_tex.sh
+        ./build_tex.sh /home/latex
 
     - name: Upload PDF
       uses: actions/upload-artifact@v3
       with:
         name: pdf-artifacts
         path: |
-          *.pdf
+          /home/latex/build/*.pdf
 
   # build:
   #   runs-on: ubuntu-latest
@@ -35,7 +38,7 @@ jobs:
 
   #   steps:
   #   - name: Checkout code
-  #     uses: actions/checkout@v2
+  #     uses: actions/checkout@v4
   #     with:
   #       submodules: recursive
   #       fetch-depth: 0
