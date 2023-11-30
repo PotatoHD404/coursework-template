@@ -2,10 +2,7 @@
 FROM alpine:latest
 
 # Define user parameters as arguments
-ARG USER_NAME=latex
 ARG USER_HOME=/home/latex
-ARG USER_ID=1000
-ARG USER_GECOS=LaTeX
 
 # Install TeX Live and other necessary tools using apk
 # Note: Alpine uses different package names and might not have all Debian packages
@@ -24,9 +21,7 @@ RUN apk add --no-cache \
     python3 \
     openjdk11-jre-headless \
     shadow \
-    fontconfig \
-    msttcorefonts-installer && \
-    update-ms-fonts && \
+    fontconfig && \
     git clone https://gitlab.com/git-latexdiff/git-latexdiff.git && \
     cd git-latexdiff && \
     make install-bin && \
@@ -60,7 +55,7 @@ RUN tlmgr update --self && \
     euenc filehook fontspec makecmds polyglossia tipa xkeyval xunicode \
     csquotes metalogo xltxtra multirow fp ms pgf xcolor paralist titlesec appendix listings \
     pdflscape setspace enumitem float framed fvextra lineno minted newfloat xstring fancyvrb \
-    upquote booktabs
+    upquote booktabs biber
 # Create a directory for custom fonts
 RUN mkdir -p /usr/share/fonts/custom
 
@@ -71,10 +66,9 @@ COPY fonts/*.ttf fonts/*.otf /usr/share/fonts/custom/
 # Update the font cache to include the custom fonts
 RUN fc-cache -f -v
 
-# Set default working directory
 WORKDIR $USER_HOME
 
-COPY ./dependencies/* .
+# COPY ./dependencies/* .
 
 COPY ./build_tex.sh .
 

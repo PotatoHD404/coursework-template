@@ -6,9 +6,27 @@ PATH_TO_WORKSPACE=${1:-/workspace}
 # Copy files from the specified path to the current directory
 cp -r "$PATH_TO_WORKSPACE"/* .
 
-# Find all .tex files and start compiling each in the background
+# Function to compile a LaTeX file with xelatex and biber
+compile_tex_file() {
+    local file=$1
+    local base_name=$(basename "$file" .tex)
+
+    # Compile with xelatex
+    texliveonfly --compiler=xelatex --arguments='-shell-escape' "$file"
+
+    # Run biber if needed
+    if [ -e "$base_name.bcf" ]; then
+        biber "$base_name"
+    fi
+
+    # Second and third run of xelatex
+    xelatex -shell-escape "$file"
+    xelatex -shell-escape "$file"
+}
+
+# Find all .tex files and compile each in parallel
 for file in *.tex; do
-    texliveonfly --compiler=xelatex --arguments='-shell-escape' "$file" &
+    compile_tex_file "$file" &
 done
 
 # Wait for all background processes to finish
