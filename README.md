@@ -1,5 +1,9 @@
 # Шаблон курсовой работы 22 кафедры МИФИ
 
+## Ссылка на авторов
+
+### [gitlab.com/skibcsit/thesis-template](https://gitlab.com/skibcsit/thesis-template)
+
 ## Компиляция
 
 ### Локально
